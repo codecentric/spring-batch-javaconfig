@@ -36,8 +36,8 @@ public class FlatfileToDbJobConfiguration {
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
-	public Job job(){
-		return jobBuilderFactory.get("job")
+	public Job flatfileToDbJob(){
+		return jobBuilderFactory.get("flatfileToDbJob")
 				.listener(protocolListener())
 				.start(step())
 				.build();

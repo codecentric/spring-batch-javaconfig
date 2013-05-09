@@ -1,7 +1,5 @@
 package de.codecentric.batch.configuration.parent;
 
-import java.util.List;
-
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -9,9 +7,9 @@ import org.springframework.batch.core.repository.JobRepository;
 
 public class CustomJobBuilderFactory extends JobBuilderFactory {
 
-	private List<JobExecutionListener> listeners;
+	private JobExecutionListener[] listeners;
 	
-	public CustomJobBuilderFactory(JobRepository jobRepository, List<JobExecutionListener> listeners) {
+	public CustomJobBuilderFactory(JobRepository jobRepository, JobExecutionListener... listeners) {
 		super(jobRepository);
 		this.listeners = listeners;
 	}

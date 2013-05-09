@@ -18,7 +18,8 @@ public class StandaloneInfrastructureConfiguration implements InfrastructureConf
 	@Bean
 	public DataSource dataSource(){
 		EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
-		return embeddedDatabaseBuilder.addScript("classpath:org/springframework/batch/core/schema-hsqldb.sql")
+		return embeddedDatabaseBuilder.addScript("classpath:org/springframework/batch/core/schema-drop-hsqldb.sql")
+				.addScript("classpath:org/springframework/batch/core/schema-hsqldb.sql")
 				.addScript("classpath:schema-partner.sql").setType(EmbeddedDatabaseType.HSQL).build();
 	}
 

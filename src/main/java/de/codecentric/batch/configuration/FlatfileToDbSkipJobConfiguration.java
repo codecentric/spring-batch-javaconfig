@@ -43,8 +43,8 @@ public class FlatfileToDbSkipJobConfiguration {
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
-	public Job job(){
-		return jobBuilderFactory.get("job")
+	public Job flatfileToDbSkipJob(){
+		return jobBuilderFactory.get("flatfileToDbSkipJob")
 				.listener(protocolListener())
 				.start(step())
 				.build();
