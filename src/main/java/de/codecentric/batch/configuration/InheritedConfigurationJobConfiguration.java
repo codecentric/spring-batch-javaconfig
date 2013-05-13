@@ -19,14 +19,14 @@ public class InheritedConfigurationJobConfiguration extends CommonJobConfigurati
 	
 	@Bean
 	public Job inheritedConfigurationJob(){
-		return customJobBuilderFactory().get("inheritedConfigurationJob")
+		return customJobBuilders().get("inheritedConfigurationJob")
 				.start(step())
 				.build();
 	}
 	
 	@Bean
 	public Step step(){
-		return customStepBuilderFactory().get("step")
+		return customStepBuilders().get("step")
 				.faultTolerant()
 				.skipLimit(10)
 				.skip(UnknownGenderException.class)

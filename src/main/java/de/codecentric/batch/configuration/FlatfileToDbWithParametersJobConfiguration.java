@@ -32,17 +32,17 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	private static final String OVERRIDDEN_BY_EXPRESSION = null;
 	
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
+	private JobBuilderFactory jobBuilders;
 	
 	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilders;
 	
 	@Autowired
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
 	public Job flatfileToDbWithParametersJob(){
-		return jobBuilderFactory.get("flatfileToDbWithParametersJob")
+		return jobBuilders.get("flatfileToDbWithParametersJob")
 				.listener(protocolListener())
 				.start(step())
 				.build();
@@ -50,7 +50,7 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	
 	@Bean
 	public Step step(){
-		return stepBuilderFactory.get("step")
+		return stepBuilders.get("step")
 				.<Partner,Partner>chunk(1)
 				.reader(reader(OVERRIDDEN_BY_EXPRESSION))
 				.processor(processor())

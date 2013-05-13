@@ -14,7 +14,7 @@ public class CommonJobConfigurationForDelegation {
 	private JobRepository jobRepository;
 	
 	@Bean
-	public CustomJobBuilderFactory customJobBuilderFactory(){
+	public CustomJobBuilderFactory customJobBuilders(){
 		return new CustomJobBuilderFactory(jobRepository, protocolListener());
 	}
 	

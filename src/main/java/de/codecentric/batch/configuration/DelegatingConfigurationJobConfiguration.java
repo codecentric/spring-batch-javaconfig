@@ -31,11 +31,11 @@ public class DelegatingConfigurationJobConfiguration{
 	private CommonJobConfigurationForDelegation commonJobConfiguration;
 	
 	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilders;
 	
 	@Bean
 	public Job delegatingConfigurationJob(){
-		return commonJobConfiguration.customJobBuilderFactory()
+		return commonJobConfiguration.customJobBuilders()
 				.get("delegatingConfigurationJob")
 				.start(step())
 				.build();
@@ -43,7 +43,7 @@ public class DelegatingConfigurationJobConfiguration{
 	
 	@Bean
 	public Step step(){
-		return stepBuilderFactory.get("step")
+		return stepBuilders.get("step")
 				.<Partner,Partner>chunk(1)
 				.reader(reader())
 				.writer(writer())

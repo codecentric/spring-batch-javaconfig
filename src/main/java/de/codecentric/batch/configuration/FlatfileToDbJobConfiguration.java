@@ -27,17 +27,17 @@ import de.codecentric.batch.listener.ProtocolListener;
 public class FlatfileToDbJobConfiguration {
 	
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
+	private JobBuilderFactory jobBuilders;
 	
 	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilders;
 	
 	@Autowired
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
 	public Job flatfileToDbJob(){
-		return jobBuilderFactory.get("flatfileToDbJob")
+		return jobBuilders.get("flatfileToDbJob")
 				.listener(protocolListener())
 				.start(step())
 				.build();
@@ -45,7 +45,7 @@ public class FlatfileToDbJobConfiguration {
 	
 	@Bean
 	public Step step(){
-		return stepBuilderFactory.get("step")
+		return stepBuilders.get("step")
 				.<Partner,Partner>chunk(1)
 				.reader(reader())
 				.processor(processor())

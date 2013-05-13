@@ -14,11 +14,8 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
 
 import de.codecentric.batch.ValidationProcessor;
@@ -31,20 +28,18 @@ import de.codecentric.batch.listener.ProtocolListener;
 @Configuration
 public class FlatfileToDbSkipJobConfiguration {
 	
-	private static final String OVERRIDDEN_BY_EXPRESSION = null;
+	@Autowired
+	private JobBuilderFactory jobBuilders;
 	
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-	
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilders;
 	
 	@Autowired
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
 	public Job flatfileToDbSkipJob(){
-		return jobBuilderFactory.get("flatfileToDbSkipJob")
+		return jobBuilders.get("flatfileToDbSkipJob")
 				.listener(protocolListener())
 				.start(step())
 				.build();
@@ -52,9 +47,9 @@ public class FlatfileToDbSkipJobConfiguration {
 	
 	@Bean
 	public Step step(){
-		return stepBuilderFactory.get("step")
+		return stepBuilders.get("step")
 				.<Partner,Partner>chunk(1)
-				.reader(reader(OVERRIDDEN_BY_EXPRESSION))
+				.reader(reader())
 				.processor(processor())
 				.writer(writer())
 				.listener(logProcessListener())
@@ -66,12 +61,10 @@ public class FlatfileToDbSkipJobConfiguration {
 	}
 	
 	@Bean
-	//@StepScope
-	@Scope(value="step", proxyMode=ScopedProxyMode.TARGET_CLASS)
-	public FlatFileItemReader<Partner> reader(@Value("#{jobParameters[pathToFile]}") String pathToFile){
+	public FlatFileItemReader<Partner> reader(){
 		FlatFileItemReader<Partner> itemReader = new FlatFileItemReader<Partner>();
 		itemReader.setLineMapper(lineMapper());
-		itemReader.setResource(new ClassPathResource(pathToFile));
+		itemReader.setResource(new ClassPathResource("partner-import.csv"));
 		return itemReader;
 	}
 	

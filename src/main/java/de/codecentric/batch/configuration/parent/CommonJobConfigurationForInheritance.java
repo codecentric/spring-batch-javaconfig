@@ -33,11 +33,11 @@ public abstract class CommonJobConfigurationForInheritance {
 	@Autowired
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
-	protected CustomJobBuilderFactory customJobBuilderFactory(){
+	protected CustomJobBuilderFactory customJobBuilders(){
 		return new CustomJobBuilderFactory(jobRepository, protocolListener());
 	}
 	
-	protected CustomStepBuilderFactory<Partner,Partner> customStepBuilderFactory(){
+	protected CustomStepBuilderFactory<Partner,Partner> customStepBuilders(){
 		return new CustomStepBuilderFactory<Partner,Partner>(
 				jobRepository,
 				transactionManager,
