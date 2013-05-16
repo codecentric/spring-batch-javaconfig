@@ -83,7 +83,7 @@ public class FlatfileToDbWithParametersAutowiringJobConfiguration {
 	
 	@Bean
 	public ItemProcessor<Partner,Partner> processor(){
-		return new LogItemProcessor();
+		return new LogItemProcessor<Partner>();
 	}
 	
 	@Bean

@@ -1,9 +1,13 @@
-package de.codecentric.batch.configuration;
+package de.codecentric.batch.configuration.partitioning;
+
+import java.io.IOException;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.partition.support.MultiResourcePartitioner;
+import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
@@ -14,12 +18,11 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import de.codecentric.batch.LogItemProcessor;
 import de.codecentric.batch.domain.Partner;
@@ -27,9 +30,10 @@ import de.codecentric.batch.listener.LogProcessListener;
 import de.codecentric.batch.listener.ProtocolListener;
 
 @Configuration
-public class FlatfileToDbWithParametersJobConfiguration {
+public class FlatfileToDbPartitioningJobConfiguration {
 	
-	private static final String OVERRIDDEN_BY_EXPRESSION = null;
+	@Autowired
+	private ResourcePatternResolver resourcePatternResolver;
 	
 	@Autowired
 	private JobBuilderFactory jobBuilders;
@@ -41,18 +45,27 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	private InfrastructureConfiguration infrastructureConfiguration;
 	
 	@Bean
-	public Job flatfileToDbWithParametersJob(){
-		return jobBuilders.get("flatfileToDbWithParametersJob")
+	public Job flatfileToDbPartitioningJob(){
+		return jobBuilders.get("flatfileToDbPartitioningJob")
 				.listener(protocolListener())
-				.start(step())
+				.start(partitionStep())
 				.build();
 	}
 	
 	@Bean
-	public Step step(){
-		return stepBuilders.get("step")
+	public Step partitionStep(){
+		return stepBuilders.get("partitionStep")
+				.partitioner(flatfileToDbStep())
+				.partitioner("flatfileToDbStep", partitioner())
+				.taskExecutor(infrastructureConfiguration.taskExecutor())
+				.build();
+	}
+	
+	@Bean
+	public Step flatfileToDbStep(){
+		return stepBuilders.get("flatfileToDbStep")
 				.<Partner,Partner>chunk(1)
-				.reader(reader(OVERRIDDEN_BY_EXPRESSION))
+				.reader(reader())
 				.processor(processor())
 				.writer(writer())
 				.listener(logProcessListener())
@@ -60,12 +73,23 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	}
 	
 	@Bean
-	//@StepScope
-	@Scope(value="step", proxyMode=ScopedProxyMode.TARGET_CLASS)
-	public FlatFileItemReader<Partner> reader(@Value("#{jobParameters[pathToFile]}") String pathToFile){
+	public Partitioner partitioner(){
+		MultiResourcePartitioner partitioner = new MultiResourcePartitioner();
+		Resource[] resources;
+		try {
+			resources = resourcePatternResolver.getResources("file:src/test/resources/*.csv");
+		} catch (IOException e) {
+			throw new RuntimeException("I/O problems when resolving the input file pattern.",e);
+		}
+		partitioner.setResources(resources);
+		return partitioner;
+	}
+	
+	@Bean
+	public FlatFileItemReader<Partner> reader(){
 		FlatFileItemReader<Partner> itemReader = new FlatFileItemReader<Partner>();
 		itemReader.setLineMapper(lineMapper());
-		itemReader.setResource(new ClassPathResource(pathToFile));
+		itemReader.setResource(new ClassPathResource("partner-import.csv"));
 		return itemReader;
 	}
 	
@@ -105,5 +129,4 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	public LogProcessListener logProcessListener(){
 		return new LogProcessListener();
 	}
-	
 }
