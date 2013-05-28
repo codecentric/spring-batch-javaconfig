@@ -23,6 +23,4 @@ public class CustomJobBuilderFactory extends JobBuilderFactory {
 		return jobBuilder;
 	}
 	
-	
-
 }
