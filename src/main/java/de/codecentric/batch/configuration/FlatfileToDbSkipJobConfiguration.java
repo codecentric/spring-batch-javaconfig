@@ -25,6 +25,9 @@ import de.codecentric.batch.listener.LogProcessListener;
 import de.codecentric.batch.listener.LogSkipListener;
 import de.codecentric.batch.listener.ProtocolListener;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 public class FlatfileToDbSkipJobConfiguration {
 	

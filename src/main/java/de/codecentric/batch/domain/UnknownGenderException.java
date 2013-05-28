@@ -1,5 +1,8 @@
 package de.codecentric.batch.domain;
 
+/**
+ * @author Tobias Flohre
+ */
 public class UnknownGenderException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

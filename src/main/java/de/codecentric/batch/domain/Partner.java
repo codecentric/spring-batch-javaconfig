@@ -1,5 +1,8 @@
 package de.codecentric.batch.domain;
 
+/**
+ * @author Tobias Flohre
+ */
 public class Partner {
 	
 	private String name;

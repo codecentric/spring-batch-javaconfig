@@ -19,6 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.partitioning.StandaloneInfrastructureConfiguration;
 import de.codecentric.batch.configuration.partitioning.FlatfileToDbPartitioningJobConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={StandaloneInfrastructureConfiguration.class, FlatfileToDbPartitioningJobConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FlatfileToDbPartitioningJobTests {

@@ -10,6 +10,9 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 @EnableBatchProcessing
 public class StandaloneInfrastructureConfiguration implements InfrastructureConfiguration {

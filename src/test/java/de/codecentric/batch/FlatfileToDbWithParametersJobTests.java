@@ -20,6 +20,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.FlatfileToDbWithParametersJobConfiguration;
 import de.codecentric.batch.configuration.StandaloneInfrastructureConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={StandaloneInfrastructureConfiguration.class, FlatfileToDbWithParametersJobConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FlatfileToDbWithParametersJobTests {

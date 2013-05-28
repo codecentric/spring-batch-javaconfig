@@ -7,6 +7,7 @@ import org.springframework.batch.item.ItemProcessor;
 
 /**
  * Dummy {@link ItemProcessor} which only logs data it receives.
+ * @author Tobias Flohre
  */
 public class LogItemProcessor<T> implements ItemProcessor<T,T> {
 

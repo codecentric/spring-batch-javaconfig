@@ -19,6 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.FlatfileToDbJobConfiguration;
 import de.codecentric.batch.configuration.WebsphereInfrastructureConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={WebsphereInfrastructureConfiguration.class, FlatfileToDbJobConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FlatfileToDbWebsphereJobTests {

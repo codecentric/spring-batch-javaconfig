@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jms.core.JmsTemplate;
 
+/**
+ * @author Tobias Flohre
+ */
 public interface InfrastructureConfiguration {
 
 	@Bean

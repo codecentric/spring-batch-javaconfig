@@ -15,6 +15,9 @@ import de.codecentric.batch.LogItemProcessor;
 import de.codecentric.batch.LogItemWriter;
 import de.codecentric.batch.listener.ProtocolListener;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 public class MultiThreadedStepJobConfiguration {
 	

@@ -6,6 +6,9 @@ import org.springframework.batch.core.SkipListener;
 
 import de.codecentric.batch.domain.Partner;
 
+/**
+ * @author Tobias Flohre
+ */
 public class LogSkipListener implements SkipListener<Partner, Partner> {
 
 	private static final Log LOGGER = LogFactory.getLog(LogSkipListener.class);

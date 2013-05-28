@@ -9,6 +9,7 @@ import de.codecentric.batch.domain.UnknownGenderException;
 
 /**
  * {@link ItemProcessor} which validates data.
+ * @author Tobias Flohre
  */
 public class ValidationProcessor implements ItemProcessor<Partner,Partner> {
 

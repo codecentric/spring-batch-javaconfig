@@ -11,6 +11,9 @@ import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.StepExecution;
 
+/**
+ * @author Tobias Flohre
+ */
 public class ProtocolListener implements JobExecutionListener {
 
 	private static final Log LOGGER = LogFactory.getLog(ProtocolListener.class);

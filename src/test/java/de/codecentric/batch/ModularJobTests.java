@@ -20,6 +20,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.ModularJobConfiguration;
 import de.codecentric.batch.configuration.StandaloneInfrastructureConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={ModularJobConfiguration.class,StandaloneInfrastructureConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ModularJobTests {

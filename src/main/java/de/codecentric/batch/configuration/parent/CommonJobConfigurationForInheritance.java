@@ -22,6 +22,9 @@ import de.codecentric.batch.domain.Partner;
 import de.codecentric.batch.listener.LogProcessListener;
 import de.codecentric.batch.listener.ProtocolListener;
 
+/**
+ * @author Tobias Flohre
+ */
 public abstract class CommonJobConfigurationForInheritance {
 	
 	@Autowired

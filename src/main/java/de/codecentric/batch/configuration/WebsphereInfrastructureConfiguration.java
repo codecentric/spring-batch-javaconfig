@@ -21,7 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 /**
  * I know this is a fake - but I didn't want to install a Websphere for a little test. 
  * 
- * @author tobias.flohre
+ * @author Tobias Flohre
  */
 @Configuration
 @EnableBatchProcessing

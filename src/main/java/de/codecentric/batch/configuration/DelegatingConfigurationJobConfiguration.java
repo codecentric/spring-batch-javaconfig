@@ -20,6 +20,9 @@ import org.springframework.core.io.ClassPathResource;
 import de.codecentric.batch.configuration.parent.CommonJobConfigurationForDelegation;
 import de.codecentric.batch.domain.Partner;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 @Import(CommonJobConfigurationForDelegation.class)
 public class DelegatingConfigurationJobConfiguration{

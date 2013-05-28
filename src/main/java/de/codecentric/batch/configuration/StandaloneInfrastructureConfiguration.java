@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 @EnableBatchProcessing
 public class StandaloneInfrastructureConfiguration implements InfrastructureConfiguration {

@@ -19,6 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.InheritedConfigurationJobConfiguration;
 import de.codecentric.batch.configuration.StandaloneInfrastructureConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={StandaloneInfrastructureConfiguration.class, InheritedConfigurationJobConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InheritedConfigurationJobTests {

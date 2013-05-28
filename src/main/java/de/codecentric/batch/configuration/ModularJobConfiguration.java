@@ -6,6 +6,9 @@ import org.springframework.batch.core.configuration.support.GenericApplicationCo
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 @EnableBatchProcessing(modular=true)
 public class ModularJobConfiguration {

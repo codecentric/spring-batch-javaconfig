@@ -16,6 +16,9 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 @EnableBatchProcessing
 public class StandaloneInfrastructureConfiguration implements InfrastructureConfiguration {

@@ -5,6 +5,9 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 
+/**
+ * @author Tobias Flohre
+ */
 public class CustomJobBuilderFactory extends JobBuilderFactory {
 
 	private JobExecutionListener[] listeners;

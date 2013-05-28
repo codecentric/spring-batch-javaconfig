@@ -19,6 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import de.codecentric.batch.configuration.multithreadedstep.MultiThreadedStepJobConfiguration;
 import de.codecentric.batch.configuration.multithreadedstep.StandaloneInfrastructureConfiguration;
 
+/**
+ * @author Tobias Flohre
+ */
 @ContextConfiguration(classes={StandaloneInfrastructureConfiguration.class, MultiThreadedStepJobConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MultithreadedStepJobTests {

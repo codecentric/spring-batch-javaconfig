@@ -15,6 +15,9 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.repeat.CompletionPolicy;
 import org.springframework.transaction.PlatformTransactionManager;
 
+/**
+ * @author Tobias Flohre
+ */
 public class CustomStepBuilderFactory<I,O> {
 	
 	private JobRepository jobRepository;

@@ -14,6 +14,9 @@ import de.codecentric.batch.domain.Partner;
 import de.codecentric.batch.domain.UnknownGenderException;
 import de.codecentric.batch.listener.LogSkipListener;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 public class InheritedConfigurationJobConfiguration extends CommonJobConfigurationForInheritance{
 	

@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 import de.codecentric.batch.listener.ProtocolListener;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 public class CommonJobConfigurationForDelegation {
 	

@@ -4,6 +4,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.core.ItemProcessListener;
 
+/**
+ * @author Tobias Flohre
+ */
 public class LogProcessListener implements ItemProcessListener<Object, Object> {
 
 	private static final Log log = LogFactory.getLog(LogProcessListener.class);

@@ -9,6 +9,7 @@ import org.springframework.batch.item.ItemWriter;
 
 /**
  * Dummy {@link ItemWriter} which only logs data it receives.
+ * @author Tobias Flohre
  */
 public class LogItemWriter<T> implements ItemWriter<T> {
 

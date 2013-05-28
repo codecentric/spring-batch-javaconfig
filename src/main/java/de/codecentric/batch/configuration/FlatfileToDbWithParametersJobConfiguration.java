@@ -4,6 +4,7 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
@@ -17,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
 
 import de.codecentric.batch.LogItemProcessor;
@@ -26,6 +25,9 @@ import de.codecentric.batch.domain.Partner;
 import de.codecentric.batch.listener.LogProcessListener;
 import de.codecentric.batch.listener.ProtocolListener;
 
+/**
+ * @author Tobias Flohre
+ */
 @Configuration
 public class FlatfileToDbWithParametersJobConfiguration {
 	
@@ -60,8 +62,7 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	}
 	
 	@Bean
-	//@StepScope
-	@Scope(value="step", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	@StepScope
 	public FlatFileItemReader<Partner> reader(@Value("#{jobParameters[pathToFile]}") String pathToFile){
 		FlatFileItemReader<Partner> itemReader = new FlatFileItemReader<Partner>();
 		itemReader.setLineMapper(lineMapper());
