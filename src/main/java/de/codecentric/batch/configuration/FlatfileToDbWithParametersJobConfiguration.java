@@ -6,6 +6,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemStream;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import de.codecentric.batch.CheckItemCountItemStream;
 import de.codecentric.batch.LogItemProcessor;
 import de.codecentric.batch.domain.Partner;
 import de.codecentric.batch.listener.LogProcessListener;
@@ -54,10 +56,11 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	public Step step(){
 		return stepBuilders.get("step")
 				.<Partner,Partner>chunk(1)
-				.reader(reader(OVERRIDDEN_BY_EXPRESSION))
+    			.reader(reader(OVERRIDDEN_BY_EXPRESSION))
 				.processor(processor())
 				.writer(writer())
 				.listener(logProcessListener())
+				.stream(stream())
 				.build();
 	}
 	
@@ -86,6 +89,11 @@ public class FlatfileToDbWithParametersJobConfiguration {
 	@Bean
 	public ItemProcessor<Partner,Partner> processor(){
 		return new LogItemProcessor<Partner>();
+	}
+	
+	@Bean
+	public ItemStream stream(){
+		return new CheckItemCountItemStream();
 	}
 	
 	@Bean
